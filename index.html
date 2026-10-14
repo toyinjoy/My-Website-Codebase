@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Oluwatoyin Joy Omole helps small businesses turn their data into clear dashboards their team can run. BI consulting, data discovery and AI readiness audits.">
+<meta property="og:title" content="Joy Omole | BI consultant for small businesses">
+<meta property="og:description" content="Oluwatoyin Joy Omole helps small businesses turn their data into clear dashboards their team can run. BI consulting, data discovery and AI readiness audits.">
+<meta property="og:image" content="https://joyomole.com/joy-headshot.jpg">
+<meta property="og:url" content="https://joyomole.com/">
+<title>Joy Omole</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one scrolling page, left-aligned editorial column; hero pairs the promise with a small example dashboard */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --ink: #14222c;
+  --muted: #52626d;
+  --line: #d9e1e5;
+  --accent: #0d6e66;
+  --accent-soft: #dcefec;
+  --mark: #d99a1e;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2.1rem, 5vw, 3.4rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171c; --surface: #16222a; --ink: #e6edf0; --muted: #9db0ba;
+    --line: #26353e; --accent: #4fc0b4; --accent-soft: #173a38; --mark: #e8b44a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171c; --surface: #16222a; --ink: #e6edf0; --muted: #9db0ba;
+  --line: #26353e; --accent: #4fc0b4; --accent-soft: #173a38; --mark: #e8b44a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+  margin: 0; padding-inline: 20px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: var(--step-1); font-weight: 500; }
+p { margin: 0; max-width: 62ch; }
+.label { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* header */
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+header.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-block: 14px; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink); text-decoration: none; }
+.brand span { color: var(--accent); }
+nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+nav a:hover { color: var(--ink); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; padding-block: 64px 56px; }
+.hero > * { min-width: 0; }
+.hero .copy { display: flex; flex-direction: column; gap: 20px; }
+.hero p.lead { font-size: 1.15rem; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 12px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { color: var(--accent); }
+
+/* example dashboard */
+.dash { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px -18px rgba(13, 40, 50, 0.35); }
+.dash-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.dash-head strong { font-family: var(--font-display); font-weight: 500; }
+.tag { font-family: var(--font-data); font-size: 0.72rem; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 99px; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.kpi { border-top: 2px solid var(--line); padding-top: 8px; min-width: 0; }
+.kpi .v { font-family: var(--font-data); font-size: 1.2rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.kpi .d { font-family: var(--font-data); font-size: 0.75rem; color: var(--accent); }
+.kpi .k { font-size: 0.8rem; color: var(--muted); }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart text { font-family: var(--font-data); font-size: 11px; fill: var(--muted); }
+.chart .bar { fill: var(--accent); opacity: 0.85; }
+.chart .bar.hi { fill: var(--mark); opacity: 1; }
+.chart .grid { stroke: var(--line); }
+.note { font-size: 0.8rem; color: var(--muted); }
+
+/* sections */
+section.block { padding-block: 56px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 28px; }
+.intro { display: flex; flex-direction: column; gap: 10px; }
+
+.about { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
+.about > * { min-width: 0; }
+.portrait { aspect-ratio: 4 / 5; width: 100%; height: auto; max-width: 100%; border-radius: 8px; object-fit: cover; display: block; }
+.about .text { display: flex; flex-direction: column; gap: 14px; }
+.todo { border-left: 3px solid var(--mark); padding: 6px 12px; background: var(--surface); color: var(--muted); font-size: 0.9rem; }
+.creds { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); padding-top: 14px; }
+.creds li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 12px; font-size: 0.95rem; }
+.creds span { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service { border-top: 3px solid var(--accent); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.service .meta { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); }
+.service ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 0.95rem; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.steps li::before { content: "Step " counter(s); font-family: var(--font-data); font-size: 0.75rem; color: var(--accent); }
+.steps strong { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; }
+.steps span { color: var(--muted); font-size: 0.92rem; }
+
+.project { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.project article { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+.contact { background: var(--accent-soft); border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+.contact dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; margin: 0; }
+.contact dt { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); padding-top: 2px; }
+.contact dd { margin: 0; }
+
+footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 860px) {
+  .hero, .about, .project { grid-template-columns: 1fr; }
+  .services { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .about .portrait { max-width: 240px; }
+}
+@media (max-width: 480px) {
+  .steps { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: 1fr 1fr; }
+  .hero { padding-block: 40px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home">Joy Omole<span>.</span></a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#help">How I can help</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="home">
+  <section class="hero">
+    <div class="copy">
+      <span class="label">BI consultant for small businesses</span>
+      <h1>Turn your business data into decisions you can make yourself.</h1>
+      <p class="lead">I connect the data you already have in spreadsheets, accounting software and your till, build one clear view of how the business is doing, and train your team to run it without me.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Book a 20-minute call</a>
+        <a class="btn ghost" href="#help">See how I can help</a>
+      </div>
+    </div>
+
+    <figure class="dash" aria-label="Example dashboard for a small coffee shop">
+      <div class="dash-head">
+        <strong>Corner Coffee, week 41</strong>
+        <span class="tag">example data</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="k">Sales</div><div class="v">$8,420</div><div class="d">+6% vs last week</div></div>
+        <div class="kpi"><div class="k">Avg ticket</div><div class="v">$7.85</div><div class="d">+$0.30</div></div>
+        <div class="kpi"><div class="k">Top item</div><div class="v">Oat latte</div><div class="d">412 sold</div></div>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 320 150" role="img" aria-label="Daily sales, Saturday highest at 1,690 dollars">
+          <line class="grid" x1="0" x2="320" y1="120" y2="120"/>
+          <line class="grid" x1="0" x2="320" y1="70" y2="70" stroke-dasharray="3 4"/>
+          <text x="0" y="66">$1,000</text>
+          <!-- scale: 1,000 dollars = 50px, baseline y=120 -->
+          <rect class="bar" x="20"  y="66"  width="30" height="54"/>
+          <rect class="bar" x="62"  y="63"  width="30" height="57"/>
+          <rect class="bar" x="104" y="61"  width="30" height="59"/>
+          <rect class="bar" x="146" y="58"  width="30" height="62"/>
+          <rect class="bar" x="188" y="49"  width="30" height="71"/>
+          <rect class="bar hi" x="230" y="35.5" width="30" height="84.5"/>
+          <rect class="bar" x="272" y="47"  width="30" height="73"/>
+          <text x="35"  y="138" text-anchor="middle">Mon</text>
+          <text x="77"  y="138" text-anchor="middle">Tue</text>
+          <text x="119" y="138" text-anchor="middle">Wed</text>
+          <text x="161" y="138" text-anchor="middle">Thu</text>
+          <text x="203" y="138" text-anchor="middle">Fri</text>
+          <text x="245" y="138" text-anchor="middle">Sat</text>
+          <text x="287" y="138" text-anchor="middle">Sun</text>
+          <text x="245" y="29" text-anchor="middle">$1,690</text>
+        </svg>
+      </div>
+      <figcaption class="note">The kind of one-page view I build: what sold, when, and what changed since last week.</figcaption>
+    </figure>
+  </section>
+
+  <section class="block" id="about">
+    <div class="about">
+      <img class="portrait" src="joy-headshot.jpg" alt="Oluwatoyin Joy Omole, smiling, arms crossed, in a blue checked jacket" width="640" height="800">
+      <div class="text">
+        <span class="label">About</span>
+        <h2>Hi, I'm Oluwatoyin Joy Omole.</h2>
+        <p>I'm a data analyst and BI developer with 5 years of experience turning raw data into decisions. I've built dashboards, data models and data pipelines for microfinance institutions, commercial banks, an electricity company, insurance and transport clients, and government agencies.</p>
+        <p>Now I bring that same work to small businesses. Most owners I meet have plenty of data; it just lives in five places and takes days to pull together. I fix that at the root: connect the sources, agree the numbers that matter, and hand over dashboards your team can run on their own.</p>
+        <p>Business intelligence is where I start. Machine learning is where I'm heading: I hold a Master of Science in Computer Science and already use Python for predictive modelling and customer segmentation.</p>
+        <ul class="creds">
+          <li><span>Tools</span>Power BI, SQL Server, Excel, Tableau, Python, Azure, Snowflake, Databricks</li>
+          <li><span>Education</span>MSc Computer Science (2023)</li>
+          <li><span>Certified</span>Microsoft Azure Fundamentals</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="help">
+    <div class="intro">
+      <span class="label">How I can help</span>
+      <h2>Three ways to work together</h2>
+      <p>Each has a fixed scope and a fixed price, so you know what you get before we start.</p>
+    </div>
+    <div class="services">
+      <div class="service">
+        <h3>Data Discovery</h3>
+        <span class="meta">1 to 2 weeks · from $1,200</span>
+        <p>For owners who know they have data but not what it can tell them.</p>
+        <ul>
+          <li>A map of every data source you have</li>
+          <li>The 5 to 10 numbers that matter most</li>
+          <li>A roadmap with costs; the fee is credited if we build it</li>
+        </ul>
+      </div>
+      <div class="service">
+        <h3>AI Readiness Audit</h3>
+        <span class="meta">2 weeks · from $1,500</span>
+        <p>For owners curious about AI who want to know if their data is ready.</p>
+        <ul>
+          <li>A readiness scorecard for data, tools and skills</li>
+          <li>Three realistic AI uses for your business</li>
+          <li>A fix-first list of what's in the way</li>
+        </ul>
+      </div>
+      <div class="service">
+        <h3>End-to-End BI</h3>
+        <span class="meta">4 to 8 weeks · from $5,000</span>
+        <p>For businesses ready to replace manual reporting for good.</p>
+        <ul>
+          <li>Working dashboards on your own data</li>
+          <li>Documentation and two training sessions</li>
+          <li>30 days of support after hand-over</li>
+        </ul>
+      </div>
+    </div>
+    <ol class="steps" aria-label="How an end-to-end project runs">
+      <li><strong>Assess</strong><span>Understand your data and how you report today.</span></li>
+      <li><strong>Recommend</strong><span>Pick tools that fit your budget, not mine.</span></li>
+      <li><strong>Build</strong><span>Connect sources and build the dashboards.</span></li>
+      <li><strong>Hand over</strong><span>Train your team so they run it themselves.</span></li>
+    </ol>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="intro">
+      <span class="label">Projects</span>
+      <h2>Selected work</h2>
+      <p>Client names are left out; the problems will look familiar.</p>
+    </div>
+    <div class="project">
+      <article>
+        <span class="tag">financial services</span>
+        <h3>Loan portfolio and credit risk dashboards</h3>
+        <p>For microfinance institutions and commercial banks: data models tracking repayment behaviour, delinquency rates and revenue, so executives could steer lending decisions from one view.</p>
+      </article>
+      <article>
+        <span class="tag">consulting</span>
+        <h3>Automated reporting across systems</h3>
+        <p>For insurance and transport clients: SQL pipelines joining data from several sources, with dashboards that refresh on their own and show each team only what it should see.</p>
+      </article>
+      <article>
+        <span class="tag">land and agriculture</span>
+        <h3>Geospatial insight for planners</h3>
+        <p>For government agencies and developers: Power BI dashboards built on map data, showing land use, environmental impact and flood risk.</p>
+      </article>
+      <article>
+        <span class="tag">coming soon · example data</span>
+        <h3>Coffee shop sales dashboard</h3>
+        <p>A small-business example: daily sales, best sellers and stock to reorder, on one page the owner checks each morning.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="contact">
+      <span class="label">Contact</span>
+      <h2>Let's look at your numbers together.</h2>
+      <p>Book a free 20-minute call. Tell me how you report today, and I'll tell you honestly whether I can help.</p>
+      <dl>
+        <dt>Email</dt><dd>omoleoluwatoyin18@gmail.com</dd>
+        <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/oluwatoyin-joy-omole-8a6a48117/">Oluwatoyin Joy Omole</a></dd>
+        <dt>Booking</dt><dd><a href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Pick a time for a 20-minute call</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">© 2026 Oluwatoyin Joy Omole · joyomole.com</footer>
+</body>
+</html>
