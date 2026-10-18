@@ -11,144 +11,280 @@
 <title>Joy Omole</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one scrolling page, left-aligned editorial column; hero pairs the promise with a small example dashboard */
+/* Layout: one scrolling page. Hero pairs the promise with a live example dashboard; every section reveals on scroll and its charts draw as they enter. */
 :root {
-  --bg: #f5f7f8;
+  --bg: #f4f7f7;
   --surface: #ffffff;
-  --ink: #14222c;
+  --ink: #12212b;
   --muted: #52626d;
-  --line: #d9e1e5;
+  --line: #dbe3e6;
   --accent: #0d6e66;
+  --accent-2: #14a093;
   --accent-soft: #dcefec;
   --mark: #d99a1e;
+  --mark-soft: #f7ead0;
+  --glow-a: rgba(20, 160, 147, 0.22);
+  --glow-b: rgba(217, 154, 30, 0.18);
+  --shadow: 0 18px 40px -24px rgba(13, 40, 50, 0.45);
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --step-0: 1rem;
   --step-1: 1.25rem;
-  --step-2: 1.75rem;
-  --step-3: clamp(2.1rem, 5vw, 3.4rem);
+  --step-2: clamp(1.7rem, 3.4vw, 2.3rem);
+  --step-3: clamp(2.3rem, 5.6vw, 3.9rem);
+  --ease: cubic-bezier(.2, .7, .2, 1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f171c; --surface: #16222a; --ink: #e6edf0; --muted: #9db0ba;
-    --line: #26353e; --accent: #4fc0b4; --accent-soft: #173a38; --mark: #e8b44a;
+    --bg: #0d1519; --surface: #152128; --ink: #e6edf0; --muted: #9db0ba;
+    --line: #25343c; --accent: #4fc0b4; --accent-2: #7fdccf; --accent-soft: #163a37; --mark: #e8b44a; --mark-soft: #3a2f17;
+    --glow-a: rgba(79, 192, 180, 0.18); --glow-b: rgba(232, 180, 74, 0.12);
+    --shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f171c; --surface: #16222a; --ink: #e6edf0; --muted: #9db0ba;
-  --line: #26353e; --accent: #4fc0b4; --accent-soft: #173a38; --mark: #e8b44a;
+  --bg: #0d1519; --surface: #152128; --ink: #e6edf0; --muted: #9db0ba;
+  --line: #25343c; --accent: #4fc0b4; --accent-2: #7fdccf; --accent-soft: #163a37; --mark: #e8b44a; --mark-soft: #3a2f17;
+  --glow-a: rgba(79, 192, 180, 0.18); --glow-b: rgba(232, 180, 74, 0.12);
+  --shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   background: var(--bg); color: var(--ink);
   font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
-  margin: 0; padding-inline: 20px;
+  margin: 0; padding-inline: 20px; overflow-x: clip;
 }
-.wrap { max-width: 1040px; margin: 0 auto; }
+.wrap { max-width: 1080px; margin: 0 auto; }
 a { color: var(--accent); }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; }
-h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.01em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.02em; }
 h3 { font-size: var(--step-1); font-weight: 500; }
 p { margin: 0; max-width: 62ch; }
-.label { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.label { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
 
-/* header */
+/* scroll progress + header */
+.progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 20; background: linear-gradient(90deg, var(--accent), var(--mark)); transform-origin: 0 50%; transform: scaleX(0); }
 header.top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-  background: var(--bg); border-bottom: 1px solid var(--line);
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  margin-inline: -20px; padding-inline: 20px;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent; transition: border-color .3s;
 }
+header.top.scrolled { border-bottom-color: var(--line); }
 header.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-block: 14px; }
-.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink); text-decoration: none; }
-.brand span { color: var(--accent); }
-nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
-nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
-nav a:hover { color: var(--ink); }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+.brand span { color: var(--mark); }
+nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; position: relative; }
+nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+nav a:hover, nav a.active { color: var(--ink); }
+nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 
 /* hero */
-.hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; padding-block: 64px 56px; }
+.hero { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 72px 64px; }
 .hero > * { min-width: 0; }
-.hero .copy { display: flex; flex-direction: column; gap: 20px; }
+.blob { position: absolute; z-index: -1; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+.blob.a { width: 420px; height: 420px; background: var(--glow-a); top: -60px; right: -80px; animation: drift 14s ease-in-out infinite alternate; }
+.blob.b { width: 340px; height: 340px; background: var(--glow-b); bottom: -60px; left: -120px; animation: drift 18s ease-in-out infinite alternate-reverse; }
+@keyframes drift { to { transform: translate(-60px, 40px) scale(1.1); } }
+.hero .copy { display: flex; flex-direction: column; gap: 22px; }
+.pill { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); font-family: var(--font-data); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 0 var(--accent-2); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.rotator { color: var(--accent); white-space: nowrap; }
+.rotator::after { content: ""; display: inline-block; width: 3px; height: 0.85em; margin-left: 4px; background: var(--mark); vertical-align: -0.05em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
 .hero p.lead { font-size: 1.15rem; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn { display: inline-block; padding: 12px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent); }
-.btn.primary { background: var(--accent); color: var(--bg); }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 99px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent); transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s; }
+.btn.primary { background: var(--accent); color: var(--bg); box-shadow: 0 10px 24px -12px var(--accent); }
+.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px var(--accent); }
 .btn.ghost { color: var(--accent); }
+.btn.ghost:hover { background: var(--accent-soft); }
+.btn svg { transition: transform .25s var(--ease); }
+.btn:hover svg { transform: translateX(3px); }
 
-/* example dashboard */
-.dash { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px -18px rgba(13, 40, 50, 0.35); }
-.dash-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+/* live example dashboard */
+.dash-wrap { position: relative; }
+.dash { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 16px; box-shadow: var(--shadow); }
+.dash-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .dash-head strong { font-family: var(--font-display); font-weight: 500; }
-.tag { font-family: var(--font-data); font-size: 0.72rem; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 99px; }
+.tag { font-family: var(--font-data); font-size: 0.72rem; background: var(--accent-soft); color: var(--accent); padding: 2px 9px; border-radius: 99px; }
+.tabs { display: inline-flex; background: var(--bg); border: 1px solid var(--line); border-radius: 99px; padding: 3px; }
+.tabs button { font: 500 0.8rem var(--font-body); border: 0; background: none; color: var(--muted); padding: 5px 12px; border-radius: 99px; cursor: pointer; transition: background .25s, color .25s; }
+.tabs button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
 .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.kpi { border-top: 2px solid var(--line); padding-top: 8px; min-width: 0; }
-.kpi .v { font-family: var(--font-data); font-size: 1.2rem; font-weight: 500; font-variant-numeric: tabular-nums; }
-.kpi .d { font-family: var(--font-data); font-size: 0.75rem; color: var(--accent); }
-.kpi .k { font-size: 0.8rem; color: var(--muted); }
-.chart svg { width: 100%; height: auto; display: block; }
+.kpi { background: var(--bg); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.kpi .k { font-size: 0.78rem; color: var(--muted); }
+.kpi .v { font-family: var(--font-data); font-size: 1.1rem; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.kpi .d { font-family: var(--font-data); font-size: 0.72rem; color: var(--accent); }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
 .chart text { font-family: var(--font-data); font-size: 11px; fill: var(--muted); }
-.chart .bar { fill: var(--accent); opacity: 0.85; }
-.chart .bar.hi { fill: var(--mark); opacity: 1; }
 .chart .grid { stroke: var(--line); }
+.bar { fill: var(--accent); transition: y .7s var(--ease), height .7s var(--ease), fill .3s; }
+.bar.hi { fill: var(--mark); }
+.bar-val { transition: y .7s var(--ease), opacity .3s; font-weight: 500; }
 .note { font-size: 0.8rem; color: var(--muted); }
+.float { position: absolute; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; box-shadow: var(--shadow); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; animation: bob 5s ease-in-out infinite; }
+.float b { font-family: var(--font-data); color: var(--accent); font-weight: 500; }
+.float.one { top: -18px; left: -22px; }
+.float.two { bottom: 64px; right: -20px; animation-delay: -2.5s; }
+.float svg { flex: none; }
+@keyframes bob { 50% { transform: translateY(-8px); } }
+
+/* tool marquee */
+.marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: 16px; margin-inline: -20px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee .track { display: flex; gap: 48px; width: max-content; animation: scroll 32s linear infinite; }
+.marquee span { font-family: var(--font-display); font-weight: 500; font-size: 1.2rem; color: var(--muted); white-space: nowrap; display: inline-flex; align-items: center; gap: 48px; }
+.marquee span::after { content: "✦"; color: var(--mark); font-size: 0.8rem; }
+@keyframes scroll { to { transform: translateX(-50%); } }
 
 /* sections */
-section.block { padding-block: 56px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 28px; }
-.intro { display: flex; flex-direction: column; gap: 10px; }
+section.block { padding-block: 72px; display: flex; flex-direction: column; gap: 32px; }
+.intro { display: flex; flex-direction: column; gap: 12px; }
 
-.about { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
+/* impact counters */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 6px; min-width: 0; position: relative; overflow: hidden; }
+.stat::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--mark)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) .2s; }
+.stat.in::before { transform: scaleX(1); }
+.stat .num { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat .num small { font-size: 0.55em; color: var(--accent); margin-left: 2px; }
+.stat p { color: var(--muted); font-size: 0.92rem; }
+
+/* about */
+.about { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
 .about > * { min-width: 0; }
-.portrait { aspect-ratio: 4 / 5; width: 100%; height: auto; max-width: 100%; border-radius: 8px; object-fit: cover; display: block; }
-.about .text { display: flex; flex-direction: column; gap: 14px; }
-.todo { border-left: 3px solid var(--mark); padding: 6px 12px; background: var(--surface); color: var(--muted); font-size: 0.9rem; }
-.creds { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); padding-top: 14px; }
+.portrait-wrap { position: relative; padding: 10px; }
+.portrait-wrap::before { content: ""; position: absolute; inset: 0; border-radius: 22px; background: conic-gradient(from var(--angle, 0deg), var(--accent), var(--mark), var(--accent-2), var(--accent)); animation: spin 8s linear infinite; }
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes spin { to { --angle: 360deg; } }
+.portrait { position: relative; aspect-ratio: 4 / 5; width: 100%; height: auto; border-radius: 14px; object-fit: cover; display: block; }
+.about .text { display: flex; flex-direction: column; gap: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chips li { padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); font-size: 0.88rem; transition: transform .25s var(--ease), border-color .25s; }
+.chips li:hover { transform: translateY(-2px); border-color: var(--accent); }
+.creds { list-style: none; margin: 4px 0 0; padding: 14px 0 0; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); }
 .creds li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 12px; font-size: 0.95rem; }
 .creds span { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
 
-.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.service { border-top: 3px solid var(--accent); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.service .meta { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); }
-.service ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 0.95rem; }
+/* before/after chart */
+.compare { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: center; box-shadow: var(--shadow); }
+.compare > * { min-width: 0; }
+.compare .side { display: flex; flex-direction: column; gap: 16px; }
+.compare .tabs { align-self: flex-start; }
+.total { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.total small { font-size: 0.4em; font-weight: 500; color: var(--muted); margin-left: 6px; }
+.hbars { display: flex; flex-direction: column; gap: 14px; }
+.hbar { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 0.92rem; }
+.hbar .val { font-family: var(--font-data); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hbar .rail { grid-column: 1 / -1; height: 12px; border-radius: 99px; background: var(--bg); overflow: hidden; }
+.hbar .fill { height: 100%; width: 0; border-radius: 99px; background: var(--muted); opacity: .55; transition: width .9s var(--ease); }
+.hbar.good .fill { background: var(--accent); opacity: 1; }
 
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
-.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.steps li::before { content: "Step " counter(s); font-family: var(--font-data); font-size: 0.75rem; color: var(--accent); }
-.steps strong { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; }
+/* services */
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
+.service:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.service .icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); transition: transform .35s var(--ease); }
+.service:hover .icon { transform: rotate(-8deg) scale(1.08); }
+.service.featured { border-color: var(--accent); }
+.service.featured::after { content: "Most complete"; position: absolute; top: 18px; right: 18px; font-family: var(--font-data); font-size: 0.7rem; background: var(--mark-soft); color: var(--ink); padding: 2px 9px; border-radius: 99px; }
+.service .meta { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); }
+.service ul { margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 6px; }
+.service li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+.service li::before { content: "✓"; color: var(--accent); font-weight: 600; }
+
+/* steps timeline */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; counter-reset: s; }
+.steps::before, .steps::after { content: ""; position: absolute; top: 22px; left: 22px; right: 22px; height: 2px; background: var(--line); }
+.steps::after { background: linear-gradient(90deg, var(--accent), var(--mark)); transform: scaleX(var(--fill, 0)); transform-origin: left; transition: transform 1.6s var(--ease); }
+.steps.in { --fill: 1; }
+.steps li { counter-increment: s; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.steps li::before { content: counter(s); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--accent); color: var(--accent); font: 500 1rem var(--font-data); margin-bottom: 8px; }
+.steps strong { font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; }
 .steps span { color: var(--muted); font-size: 0.92rem; }
 
+/* projects */
 .project { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.project article { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.project article:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .project .tag { align-self: flex-start; }
-.project article { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.mini { height: 72px; border-radius: 12px; background: var(--bg); padding: 10px 12px; }
+.mini svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.mini .ln { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke-dashoffset 1.6s var(--ease) .2s; }
+.mini .ln.alt { stroke: var(--mark); }
+.mini .area { fill: var(--accent); opacity: 0; transition: opacity 1s .9s; }
+.mini .b { fill: var(--accent); transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); transition: transform .8s var(--ease); }
+.mini .b.hi { fill: var(--mark); }
+.mini .ring { fill: none; stroke-width: 9; }
+.mini .ring.bg { stroke: var(--line); }
+.mini .ring.fg { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 126; stroke-dashoffset: 126; transition: stroke-dashoffset 1.4s var(--ease) .2s; }
+.mini text { font-family: var(--font-data); font-size: 11px; fill: var(--muted); }
+.in .mini .ln { stroke-dashoffset: 0; }
+.in .mini .area { opacity: .14; }
+.in .mini .b { transform: scaleY(1); }
+.in .mini .ring.fg { stroke-dashoffset: 25; }
 
-.contact { background: var(--accent-soft); border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+/* contact */
+.contact { position: relative; overflow: hidden; border-radius: 24px; padding: clamp(28px, 5vw, 52px); display: flex; flex-direction: column; gap: 18px; color: #f2fbfa; background: linear-gradient(130deg, #0b5d56, #0d6e66 45%, #1a8a7f); }
+.contact::before, .contact::after { content: ""; position: absolute; border-radius: 50%; filter: blur(40px); pointer-events: none; }
+.contact::before { width: 300px; height: 300px; right: -80px; top: -100px; background: rgba(232, 180, 74, 0.35); animation: drift 12s ease-in-out infinite alternate; }
+.contact::after { width: 240px; height: 240px; left: 30%; bottom: -140px; background: rgba(127, 220, 207, 0.3); animation: drift 16s ease-in-out infinite alternate-reverse; }
+.contact > * { position: relative; z-index: 1; }
+.contact .label { color: #bfe9e3; }
+.contact p { color: #d5efeb; }
+.contact a { color: #fff; }
+.contact .btn.primary { align-self: flex-start; background: #fff; color: #0b5d56; border-color: #fff; box-shadow: 0 12px 26px -12px rgba(0,0,0,.5); }
 .contact dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; margin: 0; }
-.contact dt { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); padding-top: 2px; }
-.contact dd { margin: 0; }
+.contact dt { font-family: var(--font-data); font-size: 0.8rem; color: #bfe9e3; padding-top: 2px; }
+.contact dd { margin: 0; overflow-wrap: anywhere; }
 
 footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
 
-@media (max-width: 860px) {
-  .hero, .about, .project { grid-template-columns: 1fr; }
+/* scroll reveal */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+.no-js .reveal { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .hero, .about, .project, .compare { grid-template-columns: 1fr; }
   .services { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr 1fr; }
-  .about .portrait { max-width: 240px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .steps::before, .steps::after { display: none; }
+  .about .portrait-wrap { max-width: 280px; }
+  .float.one { left: 8px; }
+  .float.two { right: 8px; }
 }
 @media (max-width: 480px) {
   .steps { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: 1fr 1fr; }
-  .hero { padding-block: 40px; }
+  .kpis .kpi:last-child { grid-column: 1 / -1; }
+  .hero { padding-block: 44px; }
+  .float.two { display: none; }
+  .tabs button { padding: 5px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  .steps { --fill: 1; }
 }
 </style>
 </head>
-<body>
+<body class="no-js">
+<div class="progress" aria-hidden="true"></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#home">Joy Omole<span>.</span></a>
@@ -163,60 +299,78 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
 
 <main class="wrap" id="home">
   <section class="hero">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="copy">
-      <span class="label">BI consultant for small businesses</span>
-      <h1>Turn your business data into decisions you can make yourself.</h1>
-      <p class="lead">I connect the data you already have in spreadsheets, accounting software and your till, build one clear view of how the business is doing, and train your team to run it without me.</p>
-      <div class="actions">
-        <a class="btn primary" href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Book a 20-minute call</a>
+      <span class="pill reveal"><i></i>BI consultant for small businesses</span>
+      <h1 class="reveal" style="--d:.08s">Turn your <span class="rotator" data-words="sales,stock,spreadsheet,customer,business">business</span> data into decisions you can make yourself.</h1>
+      <p class="lead reveal" style="--d:.16s">I connect the data you already have in spreadsheets, accounting software and your till, build one clear view of how the business is doing, and train your team to run it without me.</p>
+      <div class="actions reveal" style="--d:.24s">
+        <a class="btn primary" href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Book a 20-minute call <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn ghost" href="#help">See how I can help</a>
       </div>
     </div>
 
-    <figure class="dash" aria-label="Example dashboard for a small coffee shop">
-      <div class="dash-head">
-        <strong>Corner Coffee, week 41</strong>
-        <span class="tag">example data</span>
+    <div class="dash-wrap reveal" style="--d:.2s">
+      <figure class="dash" aria-label="Live example dashboard for a small coffee shop">
+        <div class="dash-head">
+          <strong>Corner Coffee, week 41</strong>
+          <div class="tabs" role="group" aria-label="Measure">
+            <button type="button" data-m="sales" aria-pressed="true">Sales</button>
+            <button type="button" data-m="orders" aria-pressed="false">Orders</button>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="k" id="k1">Sales</div><div class="v" id="v1">$9,210</div><div class="d" id="d1">+6% vs last week</div></div>
+          <div class="kpi"><div class="k">Avg ticket</div><div class="v">$7.85</div><div class="d">+$0.30</div></div>
+          <div class="kpi"><div class="k">Top item</div><div class="v">Oat latte</div><div class="d">412 sold</div></div>
+        </div>
+        <div class="chart">
+          <svg id="daily" viewBox="0 0 320 160" role="img" aria-label="Daily sales for the week; Saturday is highest">
+            <line class="grid" x1="0" x2="320" y1="130" y2="130"/>
+          </svg>
+        </div>
+        <figcaption class="note">Example data. The kind of one-page view I build: what sold, when, and what changed since last week.</figcaption>
+      </figure>
+      <div class="float one" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 13l4-4 3 3 6-7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sales <b>+6%</b>
       </div>
-      <div class="kpis">
-        <div class="kpi"><div class="k">Sales</div><div class="v">$8,420</div><div class="d">+6% vs last week</div></div>
-        <div class="kpi"><div class="k">Avg ticket</div><div class="v">$7.85</div><div class="d">+$0.30</div></div>
-        <div class="kpi"><div class="k">Top item</div><div class="v">Oat latte</div><div class="d">412 sold</div></div>
+      <div class="float two" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--mark)" stroke-width="2"/><path d="M9 5v4l3 2" fill="none" stroke="var(--mark)" stroke-width="2" stroke-linecap="round"/></svg>
+        Refreshed <b>7:00 am</b>
       </div>
-      <div class="chart">
-        <svg viewBox="0 0 320 150" role="img" aria-label="Daily sales, Saturday highest at 1,690 dollars">
-          <line class="grid" x1="0" x2="320" y1="120" y2="120"/>
-          <line class="grid" x1="0" x2="320" y1="70" y2="70" stroke-dasharray="3 4"/>
-          <text x="0" y="66">$1,000</text>
-          <!-- scale: 1,000 dollars = 50px, baseline y=120 -->
-          <rect class="bar" x="20"  y="66"  width="30" height="54"/>
-          <rect class="bar" x="62"  y="63"  width="30" height="57"/>
-          <rect class="bar" x="104" y="61"  width="30" height="59"/>
-          <rect class="bar" x="146" y="58"  width="30" height="62"/>
-          <rect class="bar" x="188" y="49"  width="30" height="71"/>
-          <rect class="bar hi" x="230" y="35.5" width="30" height="84.5"/>
-          <rect class="bar" x="272" y="47"  width="30" height="73"/>
-          <text x="35"  y="138" text-anchor="middle">Mon</text>
-          <text x="77"  y="138" text-anchor="middle">Tue</text>
-          <text x="119" y="138" text-anchor="middle">Wed</text>
-          <text x="161" y="138" text-anchor="middle">Thu</text>
-          <text x="203" y="138" text-anchor="middle">Fri</text>
-          <text x="245" y="138" text-anchor="middle">Sat</text>
-          <text x="287" y="138" text-anchor="middle">Sun</text>
-          <text x="245" y="29" text-anchor="middle">$1,690</text>
-        </svg>
-      </div>
-      <figcaption class="note">The kind of one-page view I build: what sold, when, and what changed since last week.</figcaption>
-    </figure>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Tools I work with: Power BI, SQL Server, Excel, Tableau, Python, Azure, Snowflake, Databricks">
+    <div class="track" aria-hidden="true">
+      <span>Power BI</span><span>SQL Server</span><span>Excel</span><span>Tableau</span><span>Python</span><span>Azure</span><span>Snowflake</span><span>Databricks</span>
+      <span>Power BI</span><span>SQL Server</span><span>Excel</span><span>Tableau</span><span>Python</span><span>Azure</span><span>Snowflake</span><span>Databricks</span>
+    </div>
+  </div>
+
+  <section class="block" aria-label="At a glance">
+    <div class="stats">
+      <div class="stat reveal"><div class="num"><span data-count="6">0</span><small>+</small></div><p>years turning raw data into decisions</p></div>
+      <div class="stat reveal" style="--d:.08s"><div class="num"><span data-count="5">0</span></div><p>industries, from banking to healthcare</p></div>
+      <div class="stat reveal" style="--d:.16s"><div class="num"><span data-count="8">0</span></div><p>BI and data tools in everyday use</p></div>
+      <div class="stat reveal" style="--d:.24s"><div class="num"><span data-count="4">0</span></div><p>steps from messy data to self-service</p></div>
+    </div>
   </section>
 
   <section class="block" id="about">
     <div class="about">
-      <img class="portrait" src="joy-headshot.jpg" alt="Oluwatoyin Joy Omole, smiling, arms crossed, in a blue checked jacket" width="640" height="800">
-      <div class="text">
+      <div class="portrait-wrap reveal">
+        <img class="portrait" src="joy-headshot.jpg" alt="Oluwatoyin Joy Omole, smiling, arms crossed, in a blue checked jacket" width="640" height="800">
+      </div>
+      <div class="text reveal" style="--d:.1s">
         <span class="label">About</span>
         <h2>Hi, I'm Oluwatoyin Joy Omole.</h2>
-        <p>I'm a data analyst and BI developer with 5 years of experience turning raw data into decisions. I've built dashboards, data models and data pipelines across finance, healthcare, transportation, energy and the public sector.</p>
+        <p>I'm a data analyst and BI developer with 6 years of experience turning raw data into decisions. I've built dashboards, data models and data pipelines across finance, healthcare, transportation, energy and the public sector.</p>
+        <ul class="chips" aria-label="Industries">
+          <li>Finance</li><li>Healthcare</li><li>Transportation</li><li>Energy</li><li>Public sector</li>
+        </ul>
         <p>Now I bring that same work to small businesses. Most owners I meet have plenty of data; it just lives in five places and takes days to pull together. I fix that at the root: connect the sources, agree the numbers that matter, and hand over dashboards your team can run on their own.</p>
         <p>Business intelligence is where I start. Machine learning is where I'm heading: I hold a Master of Science in Computer Science and already use Python for predictive modelling and customer segmentation.</p>
         <ul class="creds">
@@ -228,14 +382,39 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
     </div>
   </section>
 
+  <section class="block" id="why">
+    <div class="intro reveal">
+      <span class="label">Why it matters</span>
+      <h2>Spend your week on decisions, not on spreadsheets.</h2>
+    </div>
+    <div class="compare reveal">
+      <div class="side">
+        <div class="tabs" role="group" aria-label="Show reporting week">
+          <button type="button" data-v="before" aria-pressed="true">Before</button>
+          <button type="button" data-v="after" aria-pressed="false">After</button>
+        </div>
+        <div class="total"><span id="tot">13</span><small>hours a week on reporting</small></div>
+        <p class="muted" id="cap">Pulling numbers from the till, the accounts and three spreadsheets by hand, then fixing them before anyone can act.</p>
+        <p class="note">Illustrative example of a small business, not client data.</p>
+      </div>
+      <div class="hbars" id="hbars">
+        <div class="hbar"><span>Pulling data together</span><span class="val"></span><div class="rail"><div class="fill"></div></div></div>
+        <div class="hbar"><span>Fixing spreadsheet errors</span><span class="val"></span><div class="rail"><div class="fill"></div></div></div>
+        <div class="hbar"><span>Building the weekly report</span><span class="val"></span><div class="rail"><div class="fill"></div></div></div>
+        <div class="hbar good"><span>Acting on the numbers</span><span class="val"></span><div class="rail"><div class="fill"></div></div></div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="help">
-    <div class="intro">
+    <div class="intro reveal">
       <span class="label">How I can help</span>
       <h2>Three ways to work together</h2>
-      <p>Each has a fixed scope and a fixed price, so you know what you get before we start.</p>
+      <p class="muted">Each has a fixed scope and a fixed price, so you know what you get before we start.</p>
     </div>
     <div class="services">
-      <div class="service">
+      <div class="service reveal">
+        <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></div>
         <h3>Data Discovery</h3>
         <span class="meta">1 to 2 weeks · from $1,200</span>
         <p>For owners who know they have data but not what it can tell them.</p>
@@ -245,7 +424,8 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
           <li>A roadmap with costs; the fee is credited if we build it</li>
         </ul>
       </div>
-      <div class="service">
+      <div class="service reveal" style="--d:.1s">
+        <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.3L20 9l-4.4 3.8L17 18.5 12 15.5 7 18.5l1.4-5.7L4 9l5.8-.7z"/></svg></div>
         <h3>AI Readiness Audit</h3>
         <span class="meta">2 weeks · from $1,500</span>
         <p>For owners curious about AI who want to know if their data is ready.</p>
@@ -255,7 +435,8 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
           <li>A fix-first list of what's in the way</li>
         </ul>
       </div>
-      <div class="service">
+      <div class="service featured reveal" style="--d:.2s">
+        <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V12M12 20V5M19 20v-9"/></svg></div>
         <h3>End-to-End BI</h3>
         <span class="meta">4 to 8 weeks · from $5,000</span>
         <p>For businesses ready to replace manual reporting for good.</p>
@@ -266,7 +447,7 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
         </ul>
       </div>
     </div>
-    <ol class="steps" aria-label="How an end-to-end project runs">
+    <ol class="steps reveal" aria-label="How an end-to-end project runs">
       <li><strong>Assess</strong><span>Understand your data and how you report today.</span></li>
       <li><strong>Recommend</strong><span>Pick tools that fit your budget, not mine.</span></li>
       <li><strong>Build</strong><span>Connect sources and build the dashboards.</span></li>
@@ -275,28 +456,65 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
   </section>
 
   <section class="block" id="projects">
-    <div class="intro">
+    <div class="intro reveal">
       <span class="label">Projects</span>
       <h2>Selected work</h2>
-      <p>Client names are left out; the problems will look familiar.</p>
+      <p class="muted">Client names are left out; the problems will look familiar.</p>
     </div>
     <div class="project">
-      <article>
+      <article class="reveal">
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 52" preserveAspectRatio="none">
+            <path class="area" d="M0 40 L50 36 L100 38 L150 28 L200 24 L250 16 L300 10 L300 52 L0 52Z"/>
+            <path class="ln" d="M0 40 L50 36 L100 38 L150 28 L200 24 L250 16 L300 10"/>
+            <path class="ln alt" d="M0 22 L50 26 L100 24 L150 30 L200 34 L250 38 L300 42"/>
+          </svg>
+        </div>
         <span class="tag">finance</span>
         <h3>Loan portfolio and credit risk dashboards</h3>
         <p>For microfinance institutions and commercial banks: data models tracking repayment behaviour, delinquency rates and revenue, so executives could steer lending decisions from one view.</p>
       </article>
-      <article>
+      <article class="reveal" style="--d:.1s">
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 52">
+            <circle class="ring bg" cx="26" cy="26" r="20"/>
+            <circle class="ring fg" cx="26" cy="26" r="20" transform="rotate(-90 26 26)"/>
+            <rect class="b" x="70" y="30" width="22" height="22" rx="3" style="transition-delay:.1s"/>
+            <rect class="b" x="100" y="22" width="22" height="30" rx="3" style="transition-delay:.18s"/>
+            <rect class="b hi" x="130" y="8" width="22" height="44" rx="3" style="transition-delay:.26s"/>
+            <rect class="b" x="160" y="18" width="22" height="34" rx="3" style="transition-delay:.34s"/>
+            <rect class="b" x="190" y="26" width="22" height="26" rx="3" style="transition-delay:.42s"/>
+            <text x="226" y="22">follow-ups</text>
+            <text x="226" y="40">on track</text>
+          </svg>
+        </div>
         <span class="tag">healthcare</span>
         <h3>Care management and post-discharge reporting</h3>
         <p>For a health plan: Power BI reports showing care managers who needs a follow-up and when, how members move through a program, and whether post-discharge assessments happen on time, with built-in data-quality checks.</p>
       </article>
-      <article>
+      <article class="reveal">
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 52">
+            <rect class="b" x="0" y="20" width="34" height="32" rx="3"/>
+            <rect class="b" x="44" y="12" width="34" height="40" rx="3" style="transition-delay:.08s"/>
+            <rect class="b" x="88" y="24" width="34" height="28" rx="3" style="transition-delay:.16s"/>
+            <rect class="b" x="132" y="6" width="34" height="46" rx="3" style="transition-delay:.24s"/>
+            <rect class="b" x="176" y="16" width="34" height="36" rx="3" style="transition-delay:.32s"/>
+            <rect class="b hi" x="220" y="2" width="34" height="50" rx="3" style="transition-delay:.4s"/>
+            <rect class="b" x="264" y="14" width="34" height="38" rx="3" style="transition-delay:.48s"/>
+          </svg>
+        </div>
         <span class="tag">insurance · transportation</span>
         <h3>Automated reporting across systems</h3>
         <p>For insurance and transport clients: SQL pipelines joining data from several sources, with dashboards that refresh on their own and show each team only what it should see.</p>
       </article>
-      <article>
+      <article class="reveal" style="--d:.1s">
+        <div class="mini" aria-hidden="true">
+          <svg viewBox="0 0 300 52" preserveAspectRatio="none">
+            <path class="area" d="M0 44 L43 40 L86 38 L129 34 L172 26 L215 12 L258 20 L300 16 L300 52 L0 52Z"/>
+            <path class="ln" d="M0 44 L43 40 L86 38 L129 34 L172 26 L215 12 L258 20 L300 16"/>
+          </svg>
+        </div>
         <span class="tag">coming soon · example data</span>
         <h3>Coffee shop sales dashboard</h3>
         <p>A small-business example: daily sales, best sellers and stock to reorder, on one page the owner checks each morning.</p>
@@ -305,19 +523,163 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
   </section>
 
   <section class="block" id="contact">
-    <div class="contact">
+    <div class="contact reveal">
       <span class="label">Contact</span>
       <h2>Let's look at your numbers together.</h2>
       <p>Book a free 20-minute call. Tell me how you report today, and I'll tell you honestly whether I can help.</p>
+      <a class="btn primary" href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Pick a time <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <dl>
         <dt>Email</dt><dd>omoleoluwatoyin18@gmail.com</dd>
         <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/oluwatoyin-joy-omole-8a6a48117/">Oluwatoyin Joy Omole</a></dd>
-        <dt>Booking</dt><dd><a href="https://calendar.app.google/ziCtSj1dqnHELKWQ6">Pick a time for a 20-minute call</a></dd>
       </dl>
     </div>
   </section>
 </main>
 
 <footer class="wrap">© 2026 Oluwatoyin Joy Omole · joyomole.com</footer>
+
+<script>
+(function () {
+  document.body.classList.remove("no-js");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var NS = "http://www.w3.org/2000/svg";
+
+  // Scroll progress bar, header border and active nav link
+  var bar = document.querySelector(".progress"), header = document.querySelector("header.top");
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav a"));
+  function onScroll() {
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? h.scrollTop / max : 0) + ")";
+    header.classList.toggle("scrolled", h.scrollTop > 8);
+    var current = null;
+    links.forEach(function (a) {
+      var s = document.querySelector(a.getAttribute("href"));
+      if (s && s.getBoundingClientRect().top < window.innerHeight * 0.4) current = a;
+    });
+    links.forEach(function (a) { a.classList.toggle("active", a === current); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Count-up numbers
+  function countUp(el) {
+    var target = +el.getAttribute("data-count");
+    if (reduce) { el.textContent = target; return; }
+    var t0 = null;
+    function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / 1200, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Reveal on scroll; also triggers counters and the before/after chart
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      e.target.querySelectorAll("[data-count]").forEach(countUp);
+      if (e.target.classList.contains("compare")) showWeek(currentWeek);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+  // Typing word in the headline
+  var rot = document.querySelector(".rotator");
+  if (rot && !reduce) {
+    var words = rot.getAttribute("data-words").split(","), wi = words.length - 1, ci = words[wi].length, deleting = true;
+    (function tick() {
+      var w = words[wi];
+      ci += deleting ? -1 : 1;
+      rot.textContent = w.slice(0, ci);
+      var wait = deleting ? 45 : 85;
+      if (!deleting && ci === w.length) { deleting = true; wait = 2200; }
+      else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; wait = 300; }
+      setTimeout(tick, wait);
+    })();
+  }
+
+  // Hero dashboard: bars built from data, switchable between sales and orders
+  var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  var data = {
+    sales:  { vals: [1080, 1140, 1180, 1240, 1420, 1690, 1460], fmt: function (v) { return "$" + v.toLocaleString("en-US"); }, total: "$9,210", delta: "+6% vs last week", label: "Sales" },
+    orders: { vals: [138, 145, 150, 158, 181, 215, 186], fmt: function (v) { return String(v); }, total: "1,173", delta: "+4% vs last week", label: "Orders" }
+  };
+  var svg = document.getElementById("daily"), bars = [], vals = [], base = 130, top = 26;
+  days.forEach(function (d, i) {
+    var x = 20 + i * 42;
+    var r = document.createElementNS(NS, "rect");
+    r.setAttribute("class", "bar"); r.setAttribute("x", x); r.setAttribute("width", 30); r.setAttribute("rx", 4);
+    r.setAttribute("y", base); r.setAttribute("height", 0);
+    var t = document.createElementNS(NS, "text");
+    t.setAttribute("x", x + 15); t.setAttribute("y", base + 18); t.setAttribute("text-anchor", "middle"); t.textContent = d;
+    var v = document.createElementNS(NS, "text");
+    v.setAttribute("class", "bar-val"); v.setAttribute("x", x + 15); v.setAttribute("y", base - 6); v.setAttribute("text-anchor", "middle");
+    v.style.opacity = 0;
+    svg.appendChild(r); svg.appendChild(t); svg.appendChild(v);
+    bars.push(r); vals.push(v);
+  });
+  function drawDash(m) {
+    var d = data[m], max = Math.max.apply(null, d.vals), hiIdx = d.vals.indexOf(max);
+    d.vals.forEach(function (n, i) {
+      var h = (n / max) * (base - top);
+      bars[i].setAttribute("y", base - h); bars[i].setAttribute("height", h);
+      bars[i].classList.toggle("hi", i === hiIdx);
+      vals[i].setAttribute("y", base - h - 6);
+      vals[i].textContent = d.fmt(n);
+      vals[i].style.opacity = i === hiIdx ? 1 : 0;
+    });
+    document.getElementById("k1").textContent = d.label;
+    document.getElementById("v1").textContent = d.total;
+    document.getElementById("d1").textContent = d.delta;
+    svg.setAttribute("aria-label", "Daily " + d.label.toLowerCase() + " for the week; Saturday is highest at " + d.fmt(max));
+  }
+  var tabBtns = document.querySelectorAll(".dash .tabs button"), mode = "sales";
+  tabBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      mode = b.getAttribute("data-m"); auto = false;
+      tabBtns.forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      drawDash(mode);
+    });
+  });
+  var auto = !reduce;
+  setTimeout(function () { drawDash(mode); }, reduce ? 0 : 500);
+  // Gently flip between measures until the visitor clicks a tab
+  setInterval(function () {
+    if (!auto || document.hidden) return;
+    mode = mode === "sales" ? "orders" : "sales";
+    tabBtns.forEach(function (o) { o.setAttribute("aria-pressed", o.getAttribute("data-m") === mode); });
+    drawDash(mode);
+  }, 5000);
+
+  // Before / after reporting week
+  var weeks = {
+    before: { hrs: [5, 4, 3, 1], total: 13, cap: "Pulling numbers from the till, the accounts and three spreadsheets by hand, then fixing them before anyone can act." },
+    after:  { hrs: [0.5, 0.5, 0, 3], total: 4, cap: "Data flows in on its own and the dashboard is ready each morning, so the time goes into acting on it." }
+  };
+  var currentWeek = "before", hb = document.querySelectorAll("#hbars .hbar");
+  function showWeek(k) {
+    var w = weeks[k];
+    hb.forEach(function (row, i) {
+      row.querySelector(".fill").style.width = (w.hrs[i] / 5 * 100) + "%";
+      row.querySelector(".val").textContent = w.hrs[i] === 0 ? "0 h" : w.hrs[i] + " h";
+    });
+    document.getElementById("tot").textContent = w.total;
+    document.getElementById("cap").textContent = w.cap;
+  }
+  var wkBtns = document.querySelectorAll(".compare .tabs button");
+  wkBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      currentWeek = b.getAttribute("data-v");
+      wkBtns.forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      showWeek(currentWeek);
+    });
+  });
+  if (reduce) showWeek(currentWeek);
+})();
+</script>
 </body>
 </html>
