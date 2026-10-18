@@ -124,7 +124,8 @@ section.block { padding-block: 56px; border-top: 1px solid var(--line); display:
 .steps strong { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; }
 .steps span { color: var(--muted); font-size: 0.92rem; }
 
-.project { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.project { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.project .tag { align-self: flex-start; }
 .project article { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 
 .contact { background: var(--accent-soft); border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
@@ -281,19 +282,14 @@ footer { padding-block: 32px; color: var(--muted); font-size: 0.85rem; }
     </div>
     <div class="project">
       <article>
-        <span class="tag">financial services</span>
+        <span class="tag">finance</span>
         <h3>Loan portfolio and credit risk dashboards</h3>
         <p>For microfinance institutions and commercial banks: data models tracking repayment behaviour, delinquency rates and revenue, so executives could steer lending decisions from one view.</p>
       </article>
       <article>
-        <span class="tag">consulting</span>
+        <span class="tag">insurance · transportation</span>
         <h3>Automated reporting across systems</h3>
         <p>For insurance and transport clients: SQL pipelines joining data from several sources, with dashboards that refresh on their own and show each team only what it should see.</p>
-      </article>
-      <article>
-        <span class="tag">land and agriculture</span>
-        <h3>Geospatial insight for planners</h3>
-        <p>For government agencies and developers: Power BI dashboards built on map data, showing land use, environmental impact and flood risk.</p>
       </article>
       <article>
         <span class="tag">coming soon · example data</span>
